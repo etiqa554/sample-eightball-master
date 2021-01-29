@@ -1,4 +1,4 @@
-name: Fortify ScanCentral SAST Scan
+ name: Fortify ScanCentral SAST Scan
 on:
   workflow_dispatch:
   push:
@@ -8,10 +8,10 @@ on:
     branches: [master]
 
 jobs:                                                  
-  Fortify-SAST:
+Fortify-SAST:
     # Use the appropriate runner for building your source code
-    runs-on: ubuntu-latest                                     
-
+runs-on: ubuntu-latest                                     
+ 
       # Check out source code
       - name: Check Out Source Code
         uses: actions/checkout@v2
