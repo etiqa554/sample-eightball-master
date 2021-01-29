@@ -11,7 +11,6 @@ jobs:
   Fortify-SAST:
     # Use the appropriate runner for building your source code
     runs-on: ubuntu-latest                                     
-
       # Check out source code
       - name: Check Out Source Code
         uses: actions/checkout@v2
@@ -31,7 +30,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
       - uses: fortify/gha-setup-scancentral-client@@v1.1.1   
         with:
-          version: 20.1.0                                      # Optional as 20.1.0 is the default (and currently only version available)
+          version: 20.2.0                                      # Optional as 20.1.0 is the default (and currently only version available)
           client-auth-token: ${{ secrets.CLIENT_AUTH_TOKEN }}  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
