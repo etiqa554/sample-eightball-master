@@ -13,7 +13,7 @@ jobs:
           java-version: 1.8
       - uses: fortify/gha-setup-scancentral-client@v1
         with:
-          client-auth-token: CHANGEME123!
+          client-auth-token: CHANGEME321!
       - run: scancentral -url http://13.250.132.143:8081/scancentral-ctrl/ start -bt none
       - uses: actions/upload-artifact@v2
         if: always()
