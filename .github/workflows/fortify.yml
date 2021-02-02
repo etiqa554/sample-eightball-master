@@ -14,7 +14,7 @@ jobs:
       - uses: fortify/gha-setup-scancentral-client@v1
         with:
           client-auth-token: CHANGEME321!
-      - run: scancentral -url http://13.250.132.143:8081/scancentral-ctrl start $BUILD_OPTS -bt none -upload -application demo -version v1 -uptoken 12e9c537-3fa8-4f05-94b1-a816ae65c048
+      - run: scancentral -url http://13.250.132.143:8081/scancentral-ctrl start -bt none -upload -application demo -version v1 -uptoken 12e9c537-3fa8-4f05-94b1-a816ae65c048
       - uses: actions/upload-artifact@v2
         if: always()
         with:
