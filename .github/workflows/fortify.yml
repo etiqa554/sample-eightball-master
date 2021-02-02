@@ -1,46 +1,22 @@
-name: Fortify ScanCentral SAST Scan
-'on':
-  workflow_dispatch: null
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+name: Start ScanCentral scan
+
+on: [workflow_dispatch]
+
 jobs:
-  Fortify-SAST:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check
-        uses: actions/checkout@v2
-        with:
-           fetch-depth: 2
-      - run:
-          git checkout HEAD^2
-        if: '${{ github.event_name == ''pull_request'' }}'
-      - name: Setup Java
+      - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Download Fortify ScanCentral Client
-      - uses: fortify/gha-setup-scancentral-client@@v1.1.1
+      - uses: fortify/gha-setup-scancentral-client@v1
         with:
-          version: 20.2.0
-          client-auth-token: '${{ secrets.CLIENT_AUTH_TOKEN }}'
-      - name: Perform SAST Scan
-      - run:
-          scancentral -url http://13.250.132.143:8081/scancentral-ctrl start
-          $BUILD_OPTS -bt none -upload -application demo -version v1 -uptoken
-          1058a5cb-d1cd-4294-92d0-8d2591682fc0
-        env:
-          URL: '${{ secrets.SSC_URL }}'
-          TOKEN: '${{ secrets.SSC_UPLOAD_TOKEN }}'
-          APPLICATION: My Application
-          VERSION: '1.0'
-          BUILD_OPTS: '-bt none'
-      - name: Save ScanCentral Logs
-        uses: actions/upload-artifact@v2
-        if: failure()
+          client-auth-token: CHANGEME321!
+      - run: scancentral -url http://13.250.132.143:8081/scancentral-ctrl start $BUILD_OPTS -bt none -upload -application demo -version v1 -uptoken 12e9c537-3fa8-4f05-94b1-a816ae65c048
+      - uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: scancentral-logs
           path: ~/.fortify/scancentral/log
