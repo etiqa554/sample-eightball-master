@@ -22,12 +22,12 @@ jobs:
         with:
           java-version: 1.8
       - name: Download Fortify ScanCentral Client
-      - uses: fortify/gha-setup-scancentral-client@@v1.1.1
+        uses: fortify/gha-setup-scancentral-client@@v1.1.1
         with:
           version: 20.2.0
           client-auth-token: '${{ secrets.CLIENT_AUTH_TOKEN }}'
       - name: Perform SAST Scan
-      - run: >-
+      - run:
           scancentral -url http://13.250.132.143:8081/scancentral-ctrl start
           $BUILD_OPTS -bt none -upload -application demo -version v1 -uptoken
           1058a5cb-d1cd-4294-92d0-8d2591682fc0
@@ -38,7 +38,7 @@ jobs:
           VERSION: '1.0'
           BUILD_OPTS: '-bt mvn'
       - name: Save ScanCentral Logs
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: scancentral-logs
